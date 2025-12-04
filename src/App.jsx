@@ -4,18 +4,38 @@ import './App.css';
 function App() {
   // State variables to managee OTP input, minutes, and seconds
   const [otp, setOtp] = useState("");
-  const [minutes, setMinutes] = useState(1);
-  const [seconds, setSeconds] = useState(59);
+  const [minutes, setMinutes] = useState(0);
+  const [seconds, setSeconds] = useState(10);
  
-
   // Function to resend OTP
   const resendOTP = () => {
-
-  }
+    setMinutes(0);
+    setSeconds(10);
+  };
 
   // useEffect hook to handle the countdown timer
   useEffect(() => {
-    let myInterval = setInterval(() => {
+    const Interval = setInterval(() => {
+      if(seconds > 0) {
+        setSeconds(seconds - 1);
+      }
+
+      if(seconds === 0) {
+        if(minutes === 0) {
+          clearInterval(Interval);
+        }
+        else {
+          setSeconds(59);
+          setMinutes(minutes - 1);
+        }
+      }
+      
+    }, 1000);
+    return () => {
+      clearInterval(Interval);
+    };
+  }, [seconds]);
+
 
   return (
     <div className='container'>
