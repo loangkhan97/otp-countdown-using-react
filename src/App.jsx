@@ -16,7 +16,6 @@ function App() {
 
 
 
-
   // useEffect hook to handle the countdown timer
   useEffect(() => {
     const Interval = setInterval(() => {
